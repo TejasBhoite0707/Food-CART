@@ -10,11 +10,12 @@ let app=express();
 let port=process.env.PORT || 4000;
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+//app.use(express.urlencoded({extended:true}))
 let mongourl=process.env.MongoDBURL;
 try {
     mongoose.connect(mongourl,{
-
+        useNewUrlParser:true,
+        useUnifiedTopology:true,
     })
     console.log('connection success');
     

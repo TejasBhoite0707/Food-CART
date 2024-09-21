@@ -7,7 +7,7 @@ let user=await User.findOne({email})
 if(user){
     res.status(400).json({message:"you are already registered"})
     }
-    let hashedpassword=bcryptjs.hash(password,10);
+    let hashedpassword= await bcryptjs.hash(password,10);
     let createduser=new User({
         email,
         username,
@@ -29,9 +29,9 @@ res.status(200).json({message:"Account Created Successfully",user:{
 export const login=async(req,res)=>{
 
     try {
-        let {email,password,username}=req.body;
-        let user=await User.findOne({email,username})
-     let isMatch=bcryptjs.compare(password,user.password)
+        let {email,password}=req.body;
+        let user=await User.findOne({email})
+     let isMatch= await bcryptjs.compare(password,user.password)
      if(!user || !isMatch){
         return res.status(300).json({message:"Invalid Creadintials"})
      }
@@ -40,7 +40,7 @@ export const login=async(req,res)=>{
             _id:user._id,
             email:user.email,
             username:user.username,
-        }})
+        }});
      }
     } catch (error) {
         console.log("Error"+error.message);

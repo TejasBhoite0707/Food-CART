@@ -19,7 +19,7 @@ await axios.post('http://localhost:4002/user/login',userinfo).then((res)=>{
     toast.success("Login Successfully")
     document.getElementById('my_modal_3').close()
     setTimeout(()=>{
-      window.location.reload()
+     // window.location.reload()
       localStorage.setItem('users',JSON.stringify(res.data.user))
     },1000)
   }
@@ -47,9 +47,15 @@ await axios.post('http://localhost:4002/user/login',userinfo).then((res)=>{
     
     <h3 className="font-bold text-lg mb-2">Login Here</h3>
     <span>Email</span><br/>
-    <input type='email' name='email' placeholder='Enter Your Email' className='w-96 outline-none border-2 border-zinc-400 rounded-md px-3 py-1'/><br/>
+    <input type='email' name='email' placeholder='Enter Your Email' className='w-96 outline-none border-2 border-zinc-400 rounded-md px-3 py-1'
+    {...register('email',{required:true})}
+    /><br/>
+    {errors.email && <span className='text-sm text-red-400'>This field is required</span>}
    <span>password</span><br/>
-   <input type='password' name='password' placeholder='Enter Your password' className='w-96 outline-none border-2 border-zinc-400 rounded-md px-3 py-1'/><br/>
+   <input type='password' name='password' placeholder='Enter Your password' className='w-96 outline-none border-2 border-zinc-400 rounded-md px-3 py-1'
+   {...register('password',{required:true})}
+   /><br/>
+   {errors.password && <span className='text-sm text-red-400'>This field is required</span>}
     <input type='submit' value='Login' className='bg-blue-600 rounded-md px-3 py-1 mt-3'/>
     </form>
   </div>

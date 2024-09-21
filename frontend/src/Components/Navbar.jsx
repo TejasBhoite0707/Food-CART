@@ -18,7 +18,7 @@ const onSubmit= async(data)=>{
   let userinfo={
     email:data.email,
     username:data.username,
-    password:data.password
+    password:data.password,
   }
   await axios.post('http://localhost:4002/user/signup',userinfo).then((res)=>{
     console.log(res.data);
@@ -47,7 +47,8 @@ const dispatch=useDispatch();
 <div className='space-x-1'>
     <input type='search' name='search' placeholder='search here' autoComplete='off' onChange={(e)=>dispatch(setSearch(e.target.value))}
     className='p-3 border border-gray-800 outline-none rounded-lg text-sm w-full lg:w-[25vw]'
-    />
+  
+   />
     <button className="btn bg-red-500 text-white" onClick={()=>document.getElementById('my_modal_3').showModal()}>Order Now</button>
 <dialog id="my_modal_3" className="modal">
   <div className="modal-box">
@@ -57,11 +58,20 @@ const dispatch=useDispatch();
     
     <h3 className='text-xl '>Sign up</h3>
     <span>username</span><br/>
-   <input type='text' name='username' placeholder='Enter Your Name' className='w-96 outline-none border-2 border-zinc-400 rounded-md px-3 py-1'/><br/>
+   <input type='text' name='username' placeholder='Enter Your Name' className='w-96 outline-none border-2 border-zinc-400 rounded-md px-3 py-1'
+   {...register('username',{required:true})} 
+   /><br/>
+    {errors.username && <span className='text-sm text-red-400'>This field is required</span>}
    <span>Email</span><br/>
-   <input type='email' name='email' placeholder='Enter Your Email' className='w-96 outline-none border-2 border-zinc-400 rounded-md px-3 py-1'/><br/>
+   <input type='email' name='email' placeholder='Enter Your Email' className='w-96 outline-none border-2 border-zinc-400 rounded-md px-3 py-1'
+   {...register('email',{required:true})} 
+   /><br/>
+   {errors.email && <span className='text-sm text-red-400'>This field is required</span>}
    <span>password</span><br/>
-   <input type='password' name='password' placeholder='Enter Your password' className='w-96 outline-none border-2 border-zinc-400 rounded-md px-3 py-1'/><br/>
+   <input type='password' name='password' placeholder='Enter Your password' className='w-96 outline-none border-2 border-zinc-400 rounded-md px-3 py-1'
+   {...register('password',{required:true})} 
+   /><br/>
+   {errors.password && <span className='text-sm text-red-400'>This field is required</span>}
    <div className='flex justify-between items-center mt-2'>
    <input type='submit' value='Sign Up' className='px-3 py-1 bg-blue-500 rounded-md '/>
    <span>Already Login <a className='underline cursor-pointer text-blue-700' href='/login'>Login</a></span>
