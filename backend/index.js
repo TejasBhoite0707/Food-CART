@@ -26,8 +26,8 @@ try {
 //defining routes
 app.use('/fooddata',Foodrouter)
 
-app.use('/signup',UserRouter)
-app.use('/login',UserRouter)
+
+app.use('/user',UserRouter)
 app.listen(port,()=>{
     console.log(`server is running on port-${port}`);
     
