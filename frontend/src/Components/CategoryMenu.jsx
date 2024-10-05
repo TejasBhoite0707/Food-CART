@@ -10,9 +10,9 @@ const[categeries,setCategeries]=useState([ ])
 const ListUniqueCategories=()=>{
     const uniqueCategory=[... new Set(Fd_DATA.map((food)=>food.category))];
     setCategeries(uniqueCategory);
-    console.log(uniqueCategory);
+   
 }
-console.log(categeries);
+
 
 useEffect(()=>{
 ListUniqueCategories()

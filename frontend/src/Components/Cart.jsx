@@ -11,6 +11,28 @@ const cartItem=useSelector((state)=>state.cart.cart)
 const TotalQty=cartItem.reduce((TotalQty,item)=>TotalQty+item.qty,0)
 const TotalAmount=cartItem.reduce((Total,item)=>Total+(item.qty)*(item.price),0)
 const[activeCart,setActiveCart]=useState(true);
+const handleSubmit=async(e)=>{
+  e.preventDefault();
+  let formdata=new FormData();
+  cartItem.forEach((item,index)=>{
+    formdata.append(`item_${index+1}_name`,item.name)
+    formdata.append(`item_${index+1}_price`,item.price);
+    formdata.append(`item_${index+1}_quantity`,item.qty);
+});
+formdata.append('total_quantity',TotalQty);
+formdata.append('total_amount',TotalAmount);
+let response=await fetch('https://getform.io/f/bdryvqob',{
+  method:'POST',
+  body:formdata,
+});
+  if(response.ok){
+    Navigate('/success');
+  }
+  else{
+    console.error('Form Submission Failed');
+    
+  }
+}
     return (
         <>
        <div className={`fixed right-0 top-0 w-full lg:w-[20vw] h-full bg-slate-50 p-5 ${
@@ -34,7 +56,26 @@ const[activeCart,setActiveCart]=useState(true);
         <h3 className='font-semibold text-gray-700'>Item:{TotalQty}</h3>
         <h3 className='font-semibold text-gray-700'>Total Amount:{TotalAmount}</h3>
         <hr/>
-        <button onClick={()=>Navigate('/success')} className='mb-5 border-gray-700 border-2 rounded-lg bg-green-500 p-3 hover:bg-green-800 text-white text-lg w-[90vw] lg:w-[18vw]'>CheckOut</button>
+        <form onSubmit={handleSubmit}>
+      {
+        cartItem.map((item, index) => (
+          <div key={index}>
+            <input type='hidden' name={`item_${index + 1}_name`} value={item.name} />
+            <input type='hidden' name={`item_${index + 1}_price`} value={item.price} />
+            <input type='hidden' name={`item_${index + 1}_quantity`} value={item.qty} />
+          </div>
+        ))
+      }
+      <input type='hidden' name='total_quantity' value={TotalQty} />
+      <input type='hidden' name='total_amount' value={TotalAmount} />
+      
+      <input 
+        type='submit' 
+        value='CheckOut' 
+        className='mb-5 border-gray-700 border-2 rounded-lg bg-green-500 p-3 hover:bg-green-800 text-white text-lg w-[90vw] lg:w-[18vw]'
+      />
+    </form>
+        
        </div>
        
        </div>
