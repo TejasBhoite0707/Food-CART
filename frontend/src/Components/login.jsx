@@ -27,8 +27,9 @@ await axios.post('http://localhost:4002/user/login',userinfo).then((res)=>{
    
     document.getElementById('my_modal_3').close()
     setTimeout(()=>{
-     // window.location.reload()
+     
       localStorage.setItem('UsersLogedIn',JSON.stringify(res.data.user))
+      window.location.reload()
     },1000)
   }
   
