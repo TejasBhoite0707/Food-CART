@@ -16,7 +16,7 @@ console.log(categeries);
 
 useEffect(()=>{
 ListUniqueCategories()
-},[]);
+},[categeries]);
     return (
         <div className='mx-6 '>
             <h3 className='my-5 text-xl font-semibold'>Find the Best Food</h3>
