@@ -43,7 +43,7 @@ await axios.post('http://localhost:4002/user/login',userinfo).then((res)=>{
 })
   }
   return (
-    <div className='flex justify-center min-h-screen items-center bg-gradient-to-r to-pink-700 ring-red-600'>
+    <div className='flex justify-center min-h-screen items-center bg-gradient-to-r from-red-600 to-white '>
           <div>
       <button className="btn bg-blue-600 text-white" onClick={()=>document.getElementById('my_modal_3').showModal()}>Login Here</button>
 <dialog id="my_modal_3" className="modal">

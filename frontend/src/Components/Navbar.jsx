@@ -59,7 +59,7 @@ console.log(authenticate);
      
     window.location.reload()
     
-  },1000): document.getElementById('my_modal_3').showModal()}>{authenticate?"LOGOUT":"ORDER_NOw"}</button>
+  },1000): document.getElementById('my_modal_3').showModal()}>{authenticate?"LOGOUT":"ORDER NOW"}</button>
     
 <dialog id="my_modal_3" className="modal">
   <div className="modal-box">
